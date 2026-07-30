@@ -1385,6 +1385,7 @@ let currentUserEmail = 'admin@example.com';
 const IMGBB_API_KEY = 'b2f5f64a29228a04fd1cc52fe3ed4eb3';
 
 const CONFIRM_PAGE_URL = "https://alkhal5764-gif.github.io/Confirm-your-reservation/";
+const CONFIRM_EXAM_PAGE_URL = "https://alkhal5764-gif.github.io/Confirm-your-reservation_exam/";
 const STATUSES = [
     { value: 'قيد المراجعة', label: '⏳ قيد المراجعة', css: 'status-review' },
     { value: 'تم التواصل', label: '📞 تم التواصل', css: 'status-contacted' },
@@ -1510,6 +1511,7 @@ function isNew(ts) {
 }
 
 function getConfirmationLink(reservationId) { return `${CONFIRM_PAGE_URL}?id=${reservationId}`; }
+function getConfirmationExamLink(reservationId) { return `${CONFIRM_EXAM_PAGE_URL}?id=${reservationId}`; }
 
 // ========== IMAGE PREVIEW ==========
 function previewProductImage(input) {
@@ -2217,13 +2219,72 @@ function renderExams(reservations) {
                            (status === 'cancelled' ? '<span class="status-badge cancelled">❌ ملغي</span>' : 
                            '<span class="status-badge pending">⏳ في انتظار التأكيد</span>');
         
-        tableHTML += `<tr><td>${idx+1}</td><td><span style="font-weight:800;color:#F59E0B;">${d.name || '—'}</span></td><td style="direction:ltr;">${d.phone || '—'}</td><td>${d.section || '—'}</td><td style="font-size:12px;">${formatDate(d.created_at)}</td><td>${statusBadge}</td><td><div class="actions-cell"><button class="action-btn view" onclick="openExamDetail('${id}')"><i class="fas fa-eye"></i></button><button class="action-btn edit" onclick="openExamEdit('${id}')"><i class="fas fa-edit"></i></button><button class="action-btn confirm" onclick="confirmExam('${id}')" title="تأكيد الحجز وإرسال الرابط"><i class="fas fa-check"></i></button><button class="action-btn whatsapp" onclick="sendExamWA('${id}')"><i class="fab fa-whatsapp"></i></button><button class="action-btn delete" onclick="confirmExamDelete('${id}')"><i class="fas fa-trash"></i></button></div></td></tr>`;
+        // زر عرض الإسكرين (إذا كان موجود)
+        const proofBtn = d.payment_proof_url ? 
+            `<button class="proof-btn green" onclick="viewExamProof('${id}')" title="عرض الإسكرين"><i class="fas fa-image"></i></button>` : 
+            `<button class="proof-btn red" onclick="sendExamConfirmationWA('${id}')" title="إرسال رابط التأكيد"><i class="fas fa-image"></i></button>`;
         
-        mobileHTML += `<div class="mobile-card"><div class="mobile-card-header"><div class="mobile-card-name">${d.name || '—'}</div>${statusBadge}</div><div class="mobile-card-body"><div class="mobile-card-row"><span class="mobile-card-label">📱 رقم الواتساب</span><span class="mobile-card-value">${d.phone || '—'}</span></div><div class="mobile-card-row"><span class="mobile-card-label">📚 الشعبة</span><span class="mobile-card-value">${d.section || '—'}</span></div></div><div class="mobile-card-actions"><button class="action-btn view" onclick="openExamDetail('${id}')"><i class="fas fa-eye"></i></button><button class="action-btn edit" onclick="openExamEdit('${id}')"><i class="fas fa-edit"></i></button><button class="action-btn confirm" onclick="confirmExam('${id}')"><i class="fas fa-check"></i></button><button class="action-btn whatsapp" onclick="sendExamWA('${id}')"><i class="fab fa-whatsapp"></i></button></div></div>`;
+        tableHTML += `<tr><td>${idx+1}</td><td><span style="font-weight:800;color:#F59E0B;">${d.name || '—'}</span></td><td style="direction:ltr;">${d.phone || '—'}</td><td>${d.section || '—'}</td><td style="font-size:12px;">${formatDate(d.created_at)}</td><td>${statusBadge}</td><td><div class="actions-cell">
+            <button class="action-btn view" onclick="openExamDetail('${id}')"><i class="fas fa-eye"></i></button>
+            <button class="action-btn edit" onclick="openExamEdit('${id}')"><i class="fas fa-edit"></i></button>
+            ${status !== 'confirmed' ? `<button class="action-btn confirm" onclick="confirmExam('${id}')" title="تأكيد الحجز وإرسال رابط التأكيد"><i class="fas fa-check"></i></button>` : ''}
+            <button class="action-btn whatsapp" onclick="sendExamWA('${id}')"><i class="fab fa-whatsapp"></i></button>
+            ${proofBtn}
+            <button class="action-btn delete" onclick="confirmExamDelete('${id}')"><i class="fas fa-trash"></i></button>
+        </div></td></tr>`;
+        
+        mobileHTML += `<div class="mobile-card"><div class="mobile-card-header"><div class="mobile-card-name">${d.name || '—'}</div>${statusBadge}</div><div class="mobile-card-body"><div class="mobile-card-row"><span class="mobile-card-label">📱 رقم الواتساب</span><span class="mobile-card-value">${d.phone || '—'}</span></div><div class="mobile-card-row"><span class="mobile-card-label">📚 الشعبة</span><span class="mobile-card-value">${d.section || '—'}</span></div></div><div class="mobile-card-actions"><button class="action-btn view" onclick="openExamDetail('${id}')"><i class="fas fa-eye"></i></button><button class="action-btn edit" onclick="openExamEdit('${id}')"><i class="fas fa-edit"></i></button>${status !== 'confirmed' ? `<button class="action-btn confirm" onclick="confirmExam('${id}')"><i class="fas fa-check"></i></button>` : ''}<button class="action-btn whatsapp" onclick="sendExamWA('${id}')"><i class="fab fa-whatsapp"></i></button></div></div>`;
     });
     tbody.innerHTML = tableHTML;
     mobile.innerHTML = mobileHTML;
     document.getElementById('eShowingCount').textContent = `عرض ${reservations.length} حجز`;
+}
+
+// ===== عرض إسكرين الامتحان =====
+function viewExamProof(reservationId) {
+    const res = allExams.find(r => r.id === reservationId);
+    if (!res || !res.data.payment_proof_url) { showToast('لا يوجد إسكرين مرفوع'); return; }
+    const d = res.data;
+    document.getElementById('proofContent').innerHTML = `<div class="detail-grid">
+        <div class="detail-item"><div class="detail-label">العميل</div><div class="detail-value">${d.name || '—'}</div></div>
+        <div class="detail-item"><div class="detail-label">رقم المحول منه</div><div class="detail-value">${d.sender_phone || '—'}</div></div>
+        <div class="detail-item"><div class="detail-label">تاريخ الإرسال</div><div class="detail-value">${formatDate(d.payment_submitted_at)}</div></div>
+        <div class="detail-item"><div class="detail-label">الإسكرين</div><img src="${d.payment_proof_url}" class="proof-image" onclick="window.open('${d.payment_proof_url}', '_blank')"></div>
+    </div>`;
+    document.getElementById('proofFooter').innerHTML = `<button class="btn btn-outline" onclick="closeModal('proofModal')">إغلاق</button>`;
+    openModal('proofModal');
+}
+
+// ===== إرسال رابط تأكيد الامتحان =====
+function sendExamConfirmationWA(id) {
+    const r = allExams.find(r => r.id === id);
+    if (!r) return;
+    const d = r.data;
+    const link = getConfirmationExamLink(id);
+    const phone = d.phone;
+    if (!phone) { showToast('⚠️ لا يوجد رقم واتساب'); return; }
+    
+    const cashNumber = getSiteCashNumber();
+    const cashAmount = getSiteCashAmount();
+    
+    const message = `🎓 *تأكيد حجز الامتحان - الخال*
+━━━━━━━━━━━━━━━━━━━━
+👤 *الاسم:* ${d.name || '—'}
+📚 *الشعبة:* ${d.section || '—'}
+━━━━━━━━━━━━━━━━━━━━
+💰 لتأكيد حجزك، يرجى تحويل مبلغ ${cashAmount} جنيه على رقم فودافون كاش:
+📱 ${cashNumber}
+📌 باسم: الخال
+
+🔗 بعد التحويل، اضغط على الرابط التالي لرفع إسكرين التحويل:
+${link}
+
+📌 سيتم تفعيل رابط الامتحان بعد تأكيد التحويل.
+
+شكراً لثقتكم 🤍
+الخال للخدمات التعليمية`;
+    
+    window.open(`https://wa.me/${formatPhoneForWA(phone)}?text=${encodeURIComponent(message)}`, '_blank');
 }
 
 function updateExamStats(reservations) {
@@ -2266,6 +2327,8 @@ function openExamDetail(id) {
     const d = r.data;
     const status = d.status || 'pending';
     const statusText = status === 'confirmed' ? '✅ تم التأكيد' : (status === 'cancelled' ? '❌ ملغي' : '⏳ في انتظار التأكيد');
+    const hasProof = !!d.payment_proof_url;
+    let proofSection = hasProof ? `<div class="detail-item"><div class="detail-label">📸 إسكرين التحويل</div><button class="btn btn-outline" onclick="closeModal('detailExamModal'); viewExamProof('${id}')">عرض الإسكرين</button></div>` : '';
     
     document.getElementById('detailExamContent').innerHTML = `
         <div class="detail-grid">
@@ -2274,12 +2337,14 @@ function openExamDetail(id) {
             <div class="detail-item"><div class="detail-label">الشعبة</div><div class="detail-value">${d.section || '—'}</div></div>
             <div class="detail-item"><div class="detail-label">تاريخ الحجز</div><div class="detail-value">${formatDate(d.created_at)}</div></div>
             <div class="detail-item"><div class="detail-label">الحالة</div><div class="detail-value">${statusText}</div></div>
+            ${proofSection}
         </div>
     `;
     document.getElementById('detailExamFooter').innerHTML = `
         <button class="btn btn-primary" onclick="closeModal('detailExamModal'); openExamEdit('${id}')"><i class="fas fa-edit"></i> تعديل</button>
-        <button class="btn btn-success" onclick="closeModal('detailExamModal'); confirmExam('${id}')"><i class="fas fa-check"></i> تأكيد الحجز</button>
+        ${status !== 'confirmed' ? `<button class="btn btn-success" onclick="closeModal('detailExamModal'); confirmExam('${id}')"><i class="fas fa-check"></i> تأكيد الحجز</button>` : ''}
         <button class="btn btn-success" onclick="closeModal('detailExamModal'); sendExamWA('${id}')" style="background:#25D366;"><i class="fab fa-whatsapp"></i> واتساب</button>
+        ${!hasProof ? `<button class="btn btn-outline" onclick="closeModal('detailExamModal'); sendExamConfirmationWA('${id}')" style="background:#25D366;color:#fff;"><i class="fas fa-link"></i> رابط التأكيد</button>` : ''}
         <button class="btn btn-outline" onclick="closeModal('detailExamModal')">إغلاق</button>
     `;
     openModal('detailExamModal');
@@ -2293,9 +2358,42 @@ function confirmExam(id) {
     db.collection('exam_reservations').doc(id).update({ status: 'confirmed' })
         .then(() => {
             showToast('✅ تم تأكيد الحجز');
-            sendExamWA(id);
+            // إرسال رسالة للعميل بأن الحجز تم تأكيده مع رابط الامتحان
+            sendExamConfirmedWA(id);
         })
         .catch(err => showToast('❌ حدث خطأ'));
+}
+
+// ===== إرسال رسالة تأكيد الحجز مع رابط الامتحان =====
+function sendExamConfirmedWA(id) {
+    const r = allExams.find(r => r.id === id);
+    if (!r) return;
+    const d = r.data;
+    const link = getExamLinkForSection(d.section || '');
+    const phone = d.phone;
+    if (!phone) { showToast('⚠️ لا يوجد رقم واتساب'); return; }
+    
+    const confirmationLink = getConfirmationExamLink(id);
+    
+    const message = `🎓 *تم تأكيد حجز الامتحان - الخال*
+━━━━━━━━━━━━━━━━━━━━
+👤 *الاسم:* ${d.name || '—'}
+📚 *الشعبة:* ${d.section || '—'}
+━━━━━━━━━━━━━━━━━━━━
+✅ *تم تأكيد حجزك بنجاح!*
+
+🔗 *رابط الامتحان الخاص بك:*
+${link || 'لم يتم تحديد رابط لهذه الشعبة بعد'}
+
+📌 يرجى حفظ الرابط للدخول للامتحان في الموعد المحدد.
+
+🔗 *رابط تأكيد الحجز (للرجوع):*
+${confirmationLink}
+
+شكراً لثقتكم 🤍
+الخال للخدمات التعليمية`;
+    
+    window.open(`https://wa.me/${formatPhoneForWA(phone)}?text=${encodeURIComponent(message)}`, '_blank');
 }
 
 function sendExamWA(id) {
@@ -2359,8 +2457,8 @@ function exportCSV() {
     } else if (activeTab.id === 'tab-exams') {
         const filtered = allExams;
         if (!filtered.length) { showToast('لا بيانات'); return; }
-        let csv = '\uFEFFالاسم,رقم الواتساب,الشعبة,الحالة,تاريخ الحجز\n';
-        filtered.forEach(r => { const d = r.data; csv += `"${d.name||''}","${d.phone||''}","${d.section||''}","${d.status||'pending'}","${formatDate(d.created_at)}"\n`; });
+        let csv = '\uFEFFالاسم,رقم الواتساب,الشعبة,الحالة,تاريخ الحجز,تم رفع إسكرين\n';
+        filtered.forEach(r => { const d = r.data; csv += `"${d.name||''}","${d.phone||''}","${d.section||''}","${d.status||'pending'}","${formatDate(d.created_at)}","${d.payment_proof_url ? 'نعم' : 'لا'}"\n`; });
         const link = document.createElement('a');
         link.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8;' }));
         link.download = `exams_${new Date().toISOString().slice(0,10)}.csv`;
@@ -2415,6 +2513,9 @@ window.saveExamEdit = saveExamEdit;
 window.openExamDetail = openExamDetail;
 window.confirmExam = confirmExam;
 window.sendExamWA = sendExamWA;
+window.sendExamConfirmationWA = sendExamConfirmationWA;
+window.sendExamConfirmedWA = sendExamConfirmedWA;
+window.viewExamProof = viewExamProof;
 window.confirmExamDelete = confirmExamDelete;
 window.openProductModal = openProductModal;
 window.saveProduct = saveProduct;
