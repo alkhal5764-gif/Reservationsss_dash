@@ -824,59 +824,6 @@
             to { transform: translateX(0); opacity: 1; }
         }
 
-        /* ===== EXAM LINKS SECTION ===== */
-        .exam-links-section {
-            background: rgba(26, 18, 37, 0.6);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(245, 158, 11, 0.06);
-            border-radius: 20px;
-            padding: 20px;
-            margin-bottom: 25px;
-        }
-        .exam-links-section h3 {
-            color: #F59E0B;
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 12px;
-        }
-        .exam-link-row {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            flex-wrap: wrap;
-            background: rgba(15, 10, 26, 0.4);
-            padding: 10px 14px;
-            border-radius: 12px;
-            margin-bottom: 8px;
-        }
-        .exam-link-row .section-name {
-            font-weight: 700;
-            color: #FCD34D;
-            min-width: 120px;
-            font-size: 14px;
-        }
-        .exam-link-row input {
-            flex: 1;
-            min-width: 200px;
-            padding: 8px 14px;
-            background: rgba(15, 10, 26, 0.8);
-            border: 1px solid rgba(245, 158, 11, 0.08);
-            border-radius: 12px;
-            color: #F3E8FF;
-            font-family: 'Cairo', sans-serif;
-            font-size: 13px;
-            transition: all 0.3s ease;
-        }
-        .exam-link-row input:focus {
-            border-color: #F59E0B;
-            outline: none;
-        }
-        .exam-link-row .link-actions {
-            display: flex;
-            gap: 6px;
-            flex-wrap: wrap;
-        }
-
         /* ===== DISCOUNT SECTION ===== */
         .discount-section {
             background: rgba(26, 18, 37, 0.6);
@@ -931,6 +878,101 @@
             background: rgba(239, 68, 68, 0.15);
             color: #F87171;
             border: 1px solid rgba(239, 68, 68, 0.25);
+        }
+
+        /* ===== SECTION MANAGEMENT ===== */
+        .sections-management {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(245, 158, 11, 0.06);
+        }
+        .sections-management h4 {
+            color: #F59E0B;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        .section-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(15, 10, 26, 0.4);
+            padding: 10px 14px;
+            border-radius: 12px;
+            margin-bottom: 6px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .section-item .section-name {
+            color: #D4C4E6;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        .section-item .section-actions {
+            display: flex;
+            gap: 6px;
+        }
+        .exam-link-input {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-top: 6px;
+            flex-wrap: wrap;
+        }
+        .exam-link-input input {
+            flex: 1;
+            min-width: 180px;
+            padding: 8px 12px;
+            background: rgba(15, 10, 26, 0.8);
+            border: 1px solid rgba(245, 158, 11, 0.08);
+            border-radius: 12px;
+            color: #F3E8FF;
+            font-family: 'Cairo', sans-serif;
+            font-size: 13px;
+            transition: all 0.3s ease;
+        }
+        .exam-link-input input:focus {
+            border-color: #F59E0B;
+            outline: none;
+        }
+        .exam-link-input .btn-sm {
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+        .section-exam-link {
+            font-size: 12px;
+            color: rgba(243, 232, 255, 0.3);
+            margin-top: 4px;
+        }
+        .section-exam-link a {
+            color: #FCD34D;
+            text-decoration: none;
+        }
+        .section-exam-link a:hover {
+            text-decoration: underline;
+        }
+        .section-item .section-info {
+            flex: 1;
+        }
+
+        .add-section-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .add-section-row input {
+            flex: 1;
+            padding: 10px 16px;
+            background: rgba(15, 10, 26, 0.8);
+            border: 1px solid rgba(245, 158, 11, 0.08);
+            border-radius: 12px;
+            color: #F3E8FF;
+            font-family: 'Cairo', sans-serif;
+            font-size: 14px;
+        }
+        .add-section-row input:focus {
+            border-color: #F59E0B;
+            outline: none;
         }
 
         /* ===== TAB CONTENT ===== */
@@ -995,14 +1037,15 @@
             .filter-bar { flex-direction: column; }
             .search-box, .filter-select { width: 100%; }
             .mobile-card-actions { grid-template-columns: repeat(2, 1fr); }
-            .exam-link-row { flex-direction: column; align-items: stretch; }
-            .exam-link-row input { min-width: auto; width: 100%; }
             .discount-section { flex-direction: column; }
             .discount-section input { max-width: 100%; width: 100%; }
             .top-bar { flex-direction: column; align-items: flex-start; }
             .top-bar h1 { font-size: 18px; }
             .settings-section { flex-direction: column; }
             .settings-section .setting-group { width: 100%; }
+            .section-item { flex-direction: column; align-items: stretch; }
+            .exam-link-input { flex-direction: column; align-items: stretch; }
+            .add-section-row { flex-direction: column; }
         }
 
         /* ===== LOADING ===== */
@@ -1053,57 +1096,6 @@
             font-weight: 600;
         }
 
-        /* ===== SECTION MANAGEMENT ===== */
-        .sections-management {
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(245, 158, 11, 0.06);
-        }
-        .sections-management h4 {
-            color: #F59E0B;
-            font-size: 14px;
-            font-weight: 700;
-            margin-bottom: 12px;
-        }
-        .section-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(15, 10, 26, 0.4);
-            padding: 10px 14px;
-            border-radius: 12px;
-            margin-bottom: 6px;
-        }
-        .section-item .section-name {
-            color: #D4C4E6;
-            font-weight: 600;
-            font-size: 14px;
-        }
-        .section-item .section-actions {
-            display: flex;
-            gap: 6px;
-        }
-        .add-section-row {
-            display: flex;
-            gap: 10px;
-            margin-top: 10px;
-        }
-        .add-section-row input {
-            flex: 1;
-            padding: 10px 16px;
-            background: rgba(15, 10, 26, 0.8);
-            border: 1px solid rgba(245, 158, 11, 0.08);
-            border-radius: 12px;
-            color: #F3E8FF;
-            font-family: 'Cairo', sans-serif;
-            font-size: 14px;
-        }
-        .add-section-row input:focus {
-            border-color: #F59E0B;
-            outline: none;
-        }
-
-        /* ===== SETTINGS ICON ===== */
         .settings-icon {
             color: #F59E0B;
             margin-left: 6px;
@@ -1191,14 +1183,6 @@
     <div class="tab-content" id="tab-exams">
         <div class="top-bar">
             <h1><i class="fas fa-graduation-cap" style="color:#F59E0B;"></i> إدارة حجوزات الامتحانات</h1>
-        </div>
-
-        <!-- روابط الامتحانات لكل شعبة -->
-        <div class="exam-links-section">
-            <h3><i class="fas fa-link" style="color:#F59E0B;"></i> روابط الامتحانات حسب الشعبة</h3>
-            <div id="examLinksContainer">
-                <div class="loading-state"><div class="spinner"></div><p>جاري تحميل روابط الشعب...</p></div>
-            </div>
         </div>
 
         <div class="stats-grid" id="examStats">
@@ -1309,17 +1293,22 @@
             <div class="setting-group">
                 <label><i class="fab fa-whatsapp"></i> رقم واتساب الموقع</label>
                 <input type="text" id="siteWhatsApp" placeholder="أدخل رقم الواتساب">
-                <div class="current-value" id="currentWhatsApp">الحالي: 01023456789</div>
+                <div class="current-value" id="currentWhatsApp">الحالي: جاري التحميل...</div>
             </div>
             <div class="setting-group">
                 <label><i class="fas fa-money-bill-transfer"></i> رقم تحويل فودافون كاش</label>
                 <input type="text" id="siteCashNumber" placeholder="أدخل رقم التحويل">
-                <div class="current-value" id="currentCashNumber">الحالي: 01023456789</div>
+                <div class="current-value" id="currentCashNumber">الحالي: جاري التحميل...</div>
             </div>
             <div class="setting-group">
                 <label><i class="fas fa-coins"></i> قيمة تأمين الشحن (جنيه)</label>
                 <input type="number" id="siteCashAmount" placeholder="أدخل المبلغ" min="0">
-                <div class="current-value" id="currentCashAmount">الحالي: 150</div>
+                <div class="current-value" id="currentCashAmount">الحالي: جاري التحميل...</div>
+            </div>
+            <div class="setting-group">
+                <label><i class="fas fa-graduation-cap"></i> قيمة تأكيد الامتحان (جنيه)</label>
+                <input type="number" id="siteExamAmount" placeholder="أدخل المبلغ" min="0">
+                <div class="current-value" id="currentExamAmount">الحالي: جاري التحميل...</div>
             </div>
             <div style="display:flex; gap:10px; flex-wrap:wrap;">
                 <button class="btn btn-primary" onclick="saveSettings()"><i class="fas fa-save"></i> حفظ الإعدادات</button>
@@ -1332,7 +1321,8 @@
             <p style="color:rgba(243,232,255,0.5); font-size:14px;">
                 📌 رقم الواتساب: يستخدم في أزرار التواصل ورسائل واتساب<br>
                 📌 رقم التحويل: يستخدم في رسائل تأكيد الحجز لتحويل مبلغ الشحن<br>
-                📌 قيمة تأمين الشحن: المبلغ المطلوب تحويله لتأكيد الحجز
+                📌 قيمة تأمين الشحن: المبلغ المطلوب تحويله لتأكيد حجز السماعات<br>
+                📌 قيمة تأكيد الامتحان: المبلغ المطلوب تحويله لتأكيد حجز الامتحانات
             </p>
         </div>
     </div>
@@ -1355,7 +1345,7 @@
 <div class="modal-overlay" id="confirmModal"><div class="modal" style="max-width:400px;"><div class="modal-body"><div style="text-align:center;"><div style="font-size:50px;margin-bottom:16px;"><i class="fas fa-exclamation-triangle" style="color:#F59E0B;"></i></div><h3 style="color:#F59E0B;font-weight:800;">تأكيد الحذف</h3><p style="color:rgba(243,232,255,0.4);margin:15px 0;">هل أنت متأكد من حذف هذا العنصر؟</p><div style="display:flex;gap:10px;justify-content:center;"><button class="btn btn-danger" id="confirmYes">نعم، احذف</button><button class="btn btn-outline" onclick="closeModal('confirmModal')">إلغاء</button></div></div></div></div></div>
 
 <!-- ========== PROOF MODAL ========== -->
-<div class="modal-overlay" id="proofModal"><div class="modal" style="max-width:550px;"><div class="modal-header"><h3><i class="fas fa-image" style="color:#F59E0B;"></i> إسكرين التحويل</h3><button class="modal-close" onclick="closeModal('proofModal')"><i class="fas fa-times"></i></button></div><div class="modal-body" id="proofContent"></div><div class="modal-footer" id="proofFooter"></div></div></div>
+<div class="modal-overlay" id="proofModal"><div class="modal" style="max-width:550px;"><div class="modal-header"><h3><i class="fas fa-image" style="color:#F59E0B;"></i> إسكرين التحويل</h3><button class="modal-close" onclick="closeModal('proofModal')"><i class="fas fa-times</i></button></div><div class="modal-body" id="proofContent"></div><div class="modal-footer" id="proofFooter"></div></div></div>
 
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
@@ -1379,7 +1369,6 @@ let allProducts = [];
 let allSections = [];
 let deleteId = null;
 let deleteType = null;
-let currentUserEmail = 'admin@example.com';
 
 // 🔑 مفتاح ImgBB API الجديد
 const IMGBB_API_KEY = 'b2f5f64a29228a04fd1cc52fe3ed4eb3';
@@ -1396,65 +1385,290 @@ const STATUSES = [
     { value: 'ملغي', label: '❌ ملغي', css: 'status-cancelled' }
 ];
 
-// ========== SETTINGS FUNCTIONS ==========
-function getSettings() {
-    try {
-        const settings = localStorage.getItem('siteSettings');
-        if (settings) {
-            return JSON.parse(settings);
-        }
-    } catch (e) {}
-    return {
-        whatsapp: '01023456789',
-        cashNumber: '01023456789',
-        cashAmount: '150'
-    };
-}
-
-function saveSettings() {
+// ========== SETTINGS FUNCTIONS (Firebase) ==========
+// ===== حفظ الإعدادات في Firebase =====
+async function saveSettings() {
     const whatsapp = document.getElementById('siteWhatsApp').value.trim();
     const cashNumber = document.getElementById('siteCashNumber').value.trim();
     const cashAmount = document.getElementById('siteCashAmount').value.trim();
+    const examAmount = document.getElementById('siteExamAmount').value.trim();
     
-    if (!whatsapp || !cashNumber || !cashAmount) {
+    if (!whatsapp || !cashNumber || !cashAmount || !examAmount) {
         showToast('⚠️ الرجاء ملء جميع الحقول');
         return;
     }
     if (isNaN(cashAmount) || parseFloat(cashAmount) < 0) {
-        showToast('⚠️ يرجى إدخال مبلغ صحيح');
+        showToast('⚠️ يرجى إدخال مبلغ تأمين الشحن صحيح');
+        return;
+    }
+    if (isNaN(examAmount) || parseFloat(examAmount) < 0) {
+        showToast('⚠️ يرجى إدخال مبلغ تأكيد الامتحان صحيح');
         return;
     }
     
-    const settings = { whatsapp, cashNumber, cashAmount };
-    localStorage.setItem('siteSettings', JSON.stringify(settings));
-    updateSettingsDisplay(settings);
-    showToast('✅ تم حفظ الإعدادات بنجاح');
+    try {
+        await db.collection('settings').doc('siteSettings').set({
+            whatsapp: whatsapp,
+            cashNumber: cashNumber,
+            cashAmount: cashAmount,
+            examAmount: examAmount,
+            updated_at: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        showToast('✅ تم حفظ الإعدادات في Firebase بنجاح');
+        loadSettings(); // تحديث العرض
+    } catch (err) {
+        console.error(err);
+        showToast('❌ حدث خطأ في حفظ الإعدادات');
+    }
 }
 
-function loadSettings() {
-    const settings = getSettings();
-    document.getElementById('siteWhatsApp').value = settings.whatsapp;
-    document.getElementById('siteCashNumber').value = settings.cashNumber;
-    document.getElementById('siteCashAmount').value = settings.cashAmount || '150';
-    updateSettingsDisplay(settings);
+// ===== تحميل الإعدادات من Firebase =====
+async function loadSettings() {
+    try {
+        const doc = await db.collection('settings').doc('siteSettings').get();
+        if (doc.exists) {
+            const settings = doc.data();
+            document.getElementById('siteWhatsApp').value = settings.whatsapp || '';
+            document.getElementById('siteCashNumber').value = settings.cashNumber || '';
+            document.getElementById('siteCashAmount').value = settings.cashAmount || '';
+            document.getElementById('siteExamAmount').value = settings.examAmount || '';
+            updateSettingsDisplay(settings);
+        } else {
+            // إعدادات افتراضية
+            const defaultSettings = {
+                whatsapp: '01023456789',
+                cashNumber: '01023456789',
+                cashAmount: '150',
+                examAmount: '50'
+            };
+            document.getElementById('siteWhatsApp').value = defaultSettings.whatsapp;
+            document.getElementById('siteCashNumber').value = defaultSettings.cashNumber;
+            document.getElementById('siteCashAmount').value = defaultSettings.cashAmount;
+            document.getElementById('siteExamAmount').value = defaultSettings.examAmount;
+            updateSettingsDisplay(defaultSettings);
+        }
+    } catch (err) {
+        console.error('خطأ في تحميل الإعدادات:', err);
+        showToast('❌ حدث خطأ في تحميل الإعدادات');
+    }
 }
 
 function updateSettingsDisplay(settings) {
-    document.getElementById('currentWhatsApp').textContent = `الحالي: ${settings.whatsapp}`;
-    document.getElementById('currentCashNumber').textContent = `الحالي: ${settings.cashNumber}`;
-    document.getElementById('currentCashAmount').textContent = `الحالي: ${settings.cashAmount || '150'}`;
+    document.getElementById('currentWhatsApp').textContent = `الحالي: ${settings.whatsapp || '—'}`;
+    document.getElementById('currentCashNumber').textContent = `الحالي: ${settings.cashNumber || '—'}`;
+    document.getElementById('currentCashAmount').textContent = `الحالي: ${settings.cashAmount || '—'}`;
+    document.getElementById('currentExamAmount').textContent = `الحالي: ${settings.examAmount || '—'}`;
 }
 
-function getSiteWhatsApp() {
-    return getSettings().whatsapp;
+// ===== جلب الإعدادات من Firebase (للاستخدام في الصفحات الأخرى) =====
+async function getSettings() {
+    try {
+        const doc = await db.collection('settings').doc('siteSettings').get();
+        if (doc.exists) {
+            return doc.data();
+        }
+    } catch (err) {
+        console.error('خطأ في جلب الإعدادات:', err);
+    }
+    // إعدادات افتراضية
+    return {
+        whatsapp: '01023456789',
+        cashNumber: '01023456789',
+        cashAmount: '150',
+        examAmount: '50'
+    };
 }
 
-function getSiteCashNumber() {
-    return getSettings().cashNumber;
+async function getSiteWhatsApp() {
+    const settings = await getSettings();
+    let number = settings.whatsapp || '201282235324';
+    number = number.replace(/[\s\+\-\(\)]/g, '');
+    if (number.startsWith('0')) {
+        number = '20' + number.substring(1);
+    } else if (!number.startsWith('20') && !number.startsWith('+')) {
+        number = '20' + number;
+    }
+    return number;
 }
 
-function getSiteCashAmount() {
-    return getSettings().cashAmount || '150';
+async function getSiteCashNumber() {
+    const settings = await getSettings();
+    return settings.cashNumber || '01023456789';
+}
+
+async function getSiteCashAmount() {
+    const settings = await getSettings();
+    return settings.cashAmount || '150';
+}
+
+async function getSiteExamAmount() {
+    const settings = await getSettings();
+    return settings.examAmount || '50';
+}
+
+// ===== استخدام الإعدادات في الرسائل =====
+async function buildHInvoiceMessage(data, status, paymentConfirmed) {
+    const name = data.name || 'العميل';
+    const phone = data.phone || '';
+    const address = data.address || '';
+    const device = data.device || '';
+    const question = data.question || 'لا يوجد';
+    const deliveryDate = data.delivery_date || 'لم يحدد';
+    const orderDate = formatDate(data.created_at);
+    const paymentStatus = paymentConfirmed ? '✅ تم دفع رسوم الشحن' : '⏳ لم يتم الدفع بعد';
+    const cashNumber = await getSiteCashNumber();
+    const cashAmount = await getSiteCashAmount();
+    
+    let statusMessage = '';
+    switch(status) {
+        case 'تحت التجهيز': statusMessage = '🔧 طلبك قيد التجهيز'; break;
+        case 'تم الانتهاء من التجهيز': statusMessage = '✔️ تم تجهيز طلبك'; break;
+        case 'تم تسليمه لمندوب الشحن': statusMessage = '🚚 تم تسليم طلبك للشحن'; break;
+        case 'تم الاستلام': statusMessage = '✅ تم استلام طلبك بنجاح'; break;
+        case 'تم التواصل': statusMessage = '📞 تم التواصل معك'; break;
+        case 'ملغي': statusMessage = '❌ تم إلغاء طلبك'; break;
+        default: statusMessage = `📌 تم تحديث حالتك إلى: ${status}`;
+    }
+    
+    let msg = `🏷️ *الخال للإلكترونيات - فاتورة الحجز*
+━━━━━━━━━━━━━━━━━━━━
+👤 *العميل:* ${name}
+📞 *الجوال:* ${phone}
+📍 *العنوان:* ${address}
+━━━━━━━━━━━━━━━━━━━━
+🎧 *المنتج:* سماعة ${device}
+📅 *التسليم:* ${deliveryDate}
+🕐 *تاريخ الحجز:* ${orderDate}
+💬 *ملاحظات:* ${question}
+━━━━━━━━━━━━━━━━━━━━
+💰 *حالة الدفع:* ${paymentStatus}
+📌 *حالة الطلب:* ${status}
+${statusMessage}
+━━━━━━━━━━━━━━━━━━━━
+📱 *رقم التحويل:* ${cashNumber}
+💵 *المبلغ:* ${cashAmount} جنيه
+شكراً لاختياركم الخال`;
+    return msg;
+}
+
+// ===== تحديث دالة sendHConfirmationWA =====
+async function sendHConfirmationWA(phone, name, reservationId) {
+    const link = getConfirmationLink(reservationId);
+    const formattedPhone = formatPhoneForWA(phone);
+    const cashNumber = await getSiteCashNumber();
+    const cashAmount = await getSiteCashAmount();
+    const message = `🌹 مرحباً ${name}،
+
+نشكرك على حجزك في الخال للإلكترونيات 🎧
+
+للتأكيد حجزك، يرجى تحويل مبلغ ${cashAmount} جنيه (تأمين الشحن) على رقم فودافون كاش:
+📱 ${cashNumber}
+📌 باسم: الخال
+
+🔗 بعد التحويل، اضغط على الرابط التالي لرفع إسكرين التحويل:
+${link}
+
+📸 خطوات بسيطة:
+1️⃣ حول المبلغ
+2️⃣ افتح الرابط
+3️⃣ ارفع صورة الإسكرين
+4️⃣ اكتب رقم التليفون اللي حولت منه
+5️⃣ اضغط إرسال
+
+سيتم إشعارنا فور وصول الإسكرين.
+
+شكراً لثقتك 🤍
+الخال للإلكترونيات`;
+    window.open(`https://wa.me/${formattedPhone}?text=${encodeURIComponent(message)}`, '_blank');
+}
+
+// ===== تحديث دالة sendExamConfirmationWA =====
+async function sendExamConfirmationWA(id) {
+    const r = allExams.find(r => r.id === id);
+    if (!r) return;
+    const d = r.data;
+    const link = getConfirmationExamLink(id);
+    const phone = d.phone;
+    if (!phone) { showToast('⚠️ لا يوجد رقم واتساب'); return; }
+    
+    const cashNumber = await getSiteCashNumber();
+    const examAmount = await getSiteExamAmount();
+    
+    const message = `🎓 *تأكيد حجز الامتحان - الخال*
+━━━━━━━━━━━━━━━━━━━━
+👤 *الاسم:* ${d.name || '—'}
+📚 *الشعبة:* ${d.section || '—'}
+━━━━━━━━━━━━━━━━━━━━
+💰 لتأكيد حجزك، يرجى تحويل مبلغ ${examAmount} جنيه على رقم فودافون كاش:
+📱 ${cashNumber}
+📌 باسم: الخال
+
+🔗 بعد التحويل، اضغط على الرابط التالي لرفع إسكرين التحويل:
+${link}
+
+📌 سيتم تفعيل رابط الامتحان بعد تأكيد التحويل.
+
+شكراً لثقتكم 🤍
+الخال للخدمات التعليمية`;
+    
+    window.open(`https://wa.me/${formatPhoneForWA(phone)}?text=${encodeURIComponent(message)}`, '_blank');
+}
+
+// ===== تحديث دالة sendExamConfirmedWA =====
+async function sendExamConfirmedWA(id) {
+    const r = allExams.find(r => r.id === id);
+    if (!r) return;
+    const d = r.data;
+    const phone = d.phone;
+    if (!phone) { showToast('⚠️ لا يوجد رقم واتساب'); return; }
+    
+    const confirmationLink = getConfirmationExamLink(id);
+    
+    const message = `🎓 *تم تأكيد حجز الامتحان - الخال*
+━━━━━━━━━━━━━━━━━━━━
+👤 *الاسم:* ${d.name || '—'}
+📚 *الشعبة:* ${d.section || '—'}
+━━━━━━━━━━━━━━━━━━━━
+✅ *تم تأكيد حجزك بنجاح!*
+
+📌 للحصول على رابط الامتحان الخاص بك، قم بالدخول إلى الرابط التالي:
+🔗 ${confirmationLink}
+
+📌 بعد الدخول ستجد رابط الامتحان الخاص بك.
+
+شكراً لثقتكم 🤍
+الخال للخدمات التعليمية`;
+    
+    window.open(`https://wa.me/${formatPhoneForWA(phone)}?text=${encodeURIComponent(message)}`, '_blank');
+}
+
+// ===== تحديث دالة sendExamWA =====
+async function sendExamWA(id) {
+    const r = allExams.find(r => r.id === id);
+    if (!r) return;
+    const d = r.data;
+    const phone = d.phone;
+    if (!phone) { showToast('⚠️ لا يوجد رقم واتساب'); return; }
+    
+    // جلب رابط الامتحان من Firebase
+    const link = await getExamLinkForSection(d.section || '');
+    
+    const message = `🎓 *تأكيد حجز الامتحان - الخال*
+━━━━━━━━━━━━━━━━━━━━
+👤 *الاسم:* ${d.name || '—'}
+📚 *الشعبة:* ${d.section || '—'}
+━━━━━━━━━━━━━━━━━━━━
+✅ *تم تأكيد حجزك بنجاح*
+
+🔗 *رابط الامتحان:*
+${link || 'لم يتم تحديد رابط لهذه الشعبة بعد'}
+
+📌 يرجى حفظ الرابط للدخول للامتحان في الموعد المحدد.
+
+شكراً لثقتكم 🤍
+الخال للخدمات التعليمية`;
+    
+    window.open(`https://wa.me/${formatPhoneForWA(phone)}?text=${encodeURIComponent(message)}`, '_blank');
 }
 
 // ========== TOAST ==========
@@ -1480,7 +1694,7 @@ function switchTab(tab, el) {
     document.querySelectorAll('.sidebar-nav a').forEach(a => a.classList.remove('active'));
     document.getElementById('tab-' + tab).classList.add('active');
     if (el) el.classList.add('active');
-    if (tab === 'exams') { loadExams(); loadExamLinks(); }
+    if (tab === 'exams') { loadExams(); }
     if (tab === 'headphones') loadHeadphones();
     if (tab === 'products') loadProducts();
     if (tab === 'sections') loadSections();
@@ -1791,64 +2005,20 @@ async function updateHStatus(docId, newStatus, selectEl) {
         await db.collection('reservations').doc(docId).update({ status: newStatus });
         if (selectEl) selectEl.className = 'status-select ' + getHStatusCSS(newStatus);
         showToast('✅ تم تحديث حالة الطلب');
-        sendHStatusWA(docId);
+        await sendHStatusWA(docId);
     } catch (err) { console.error(err); showToast('❌ حدث خطأ'); }
 }
 
-function sendHStatusWA(docId) {
+async function sendHStatusWA(docId) {
     const r = allHeadphones.find(r => r.id === docId);
     if (!r) return;
     const d = r.data;
     const status = d.status || 'قيد المراجعة';
     const paymentConfirmed = d.payment_confirmed === true;
-    const invoice = buildHInvoiceMessage(d, status, paymentConfirmed);
+    const invoice = await buildHInvoiceMessage(d, status, paymentConfirmed);
     const phone = d.phone;
     if (!phone) { showToast('⚠️ لا يوجد رقم هاتف'); return; }
     window.open(`https://wa.me/${formatPhoneForWA(phone)}?text=${encodeURIComponent(invoice)}`, '_blank');
-}
-
-function buildHInvoiceMessage(data, status, paymentConfirmed) {
-    const name = data.name || 'العميل';
-    const phone = data.phone || '';
-    const address = data.address || '';
-    const device = data.device || '';
-    const question = data.question || 'لا يوجد';
-    const deliveryDate = data.delivery_date || 'لم يحدد';
-    const orderDate = formatDate(data.created_at);
-    const paymentStatus = paymentConfirmed ? '✅ تم دفع رسوم الشحن' : '⏳ لم يتم الدفع بعد';
-    const cashNumber = getSiteCashNumber();
-    const cashAmount = getSiteCashAmount();
-    
-    let statusMessage = '';
-    switch(status) {
-        case 'تحت التجهيز': statusMessage = '🔧 طلبك قيد التجهيز'; break;
-        case 'تم الانتهاء من التجهيز': statusMessage = '✔️ تم تجهيز طلبك'; break;
-        case 'تم تسليمه لمندوب الشحن': statusMessage = '🚚 تم تسليم طلبك للشحن'; break;
-        case 'تم الاستلام': statusMessage = '✅ تم استلام طلبك بنجاح'; break;
-        case 'تم التواصل': statusMessage = '📞 تم التواصل معك'; break;
-        case 'ملغي': statusMessage = '❌ تم إلغاء طلبك'; break;
-        default: statusMessage = `📌 تم تحديث حالتك إلى: ${status}`;
-    }
-    
-    let msg = `🏷️ *الخال للإلكترونيات - فاتورة الحجز*
-━━━━━━━━━━━━━━━━━━━━
-👤 *العميل:* ${name}
-📞 *الجوال:* ${phone}
-📍 *العنوان:* ${address}
-━━━━━━━━━━━━━━━━━━━━
-🎧 *المنتج:* سماعة ${device}
-📅 *التسليم:* ${deliveryDate}
-🕐 *تاريخ الحجز:* ${orderDate}
-💬 *ملاحظات:* ${question}
-━━━━━━━━━━━━━━━━━━━━
-💰 *حالة الدفع:* ${paymentStatus}
-📌 *حالة الطلب:* ${status}
-${statusMessage}
-━━━━━━━━━━━━━━━━━━━━
-📱 *رقم التحويل:* ${cashNumber}
-💵 *المبلغ:* ${cashAmount} جنيه
-شكراً لاختياركم الخال`;
-    return msg;
 }
 
 async function confirmHPayment(docId) {
@@ -1861,41 +2031,11 @@ async function confirmHPayment(docId) {
         const updatedReservation = allHeadphones.find(r => r.id === docId);
         if (updatedReservation) {
             const data = updatedReservation.data;
-            const invoice = buildHInvoiceMessage(data, data.status || 'قيد المراجعة', true);
+            const invoice = await buildHInvoiceMessage(data, data.status || 'قيد المراجعة', true);
             const phone = data.phone;
             if (phone) window.open(`https://wa.me/${formatPhoneForWA(phone)}?text=${encodeURIComponent(invoice)}`, '_blank');
         }
     } catch (err) { showToast('❌ حدث خطأ'); }
-}
-
-function sendHConfirmationWA(phone, name, reservationId) {
-    const link = getConfirmationLink(reservationId);
-    const formattedPhone = formatPhoneForWA(phone);
-    const cashNumber = getSiteCashNumber();
-    const cashAmount = getSiteCashAmount();
-    const message = `🌹 مرحباً ${name}،
-
-نشكرك على حجزك في الخال للإلكترونيات 🎧
-
-للتأكيد حجزك، يرجى تحويل مبلغ ${cashAmount} جنيه (تأمين الشحن) على رقم فودافون كاش:
-📱 ${cashNumber}
-📌 باسم: الخال
-
-🔗 بعد التحويل، اضغط على الرابط التالي لرفع إسكرين التحويل:
-${link}
-
-📸 خطوات بسيطة:
-1️⃣ حول المبلغ
-2️⃣ افتح الرابط
-3️⃣ ارفع صورة الإسكرين
-4️⃣ اكتب رقم التليفون اللي حولت منه
-5️⃣ اضغط إرسال
-
-سيتم إشعارنا فور وصول الإسكرين.
-
-شكراً لثقتك 🤍
-الخال للإلكترونيات`;
-    window.open(`https://wa.me/${formattedPhone}?text=${encodeURIComponent(message)}`, '_blank');
 }
 
 function viewHProof(reservationId) {
@@ -2016,10 +2156,9 @@ function updateHeadphoneStats(reservations) {
 // ========== SECTIONS FUNCTIONS ==========
 function loadSections() {
     db.collection('exam_sections').orderBy('name', 'asc').onSnapshot(snapshot => {
-        allSections = snapshot.docs.map(doc => ({ id: doc.id, name: doc.data().name }));
+        allSections = snapshot.docs.map(doc => ({ id: doc.id, name: doc.data().name, exam_link: doc.data().exam_link || '' }));
         renderSections();
         updateSectionFilter();
-        loadExamLinks();
     }, err => console.error(err));
 }
 
@@ -2036,9 +2175,22 @@ function renderSections() {
     
     let html = '';
     allSections.forEach((section, idx) => {
+        const savedLink = section.exam_link || '';
+        
         html += `
             <div class="section-item">
-                <span class="section-name">${idx+1}. ${section.name}</span>
+                <div class="section-info">
+                    <span class="section-name">${idx+1}. ${section.name}</span>
+                    <div class="exam-link-input">
+                        <input type="url" id="sectionLink_${section.id}" placeholder="رابط الامتحان لهذه الشعبة" value="${savedLink}">
+                        <button class="btn btn-primary btn-sm" onclick="saveSectionExamLink('${section.id}', '${section.name}')"><i class="fas fa-save"></i> حفظ</button>
+                        <button class="btn btn-copy btn-sm" onclick="copySectionExamLink('${section.id}')"><i class="fas fa-copy"></i> نسخ</button>
+                        <button class="btn btn-outline btn-sm" onclick="openSectionExamLink('${section.name}')"><i class="fas fa-external-link-alt"></i> فتح</button>
+                    </div>
+                    <div class="section-exam-link">
+                        ${savedLink ? `<a href="${savedLink}" target="_blank">${savedLink}</a>` : '⚠️ لم يتم تحديد رابط'}
+                    </div>
+                </div>
                 <div class="section-actions">
                     <button class="btn btn-sm btn-danger" onclick="deleteSection('${section.id}')"><i class="fas fa-trash"></i></button>
                 </div>
@@ -2046,6 +2198,78 @@ function renderSections() {
         `;
     });
     container.innerHTML = html;
+}
+
+// ===== حفظ رابط الشعبة في Firebase =====
+async function saveSectionExamLink(sectionId, sectionName) {
+    const input = document.getElementById(`sectionLink_${sectionId}`);
+    const link = input.value.trim();
+    if (!link) {
+        showToast('⚠️ الرجاء إدخال رابط صحيح');
+        return;
+    }
+    
+    try {
+        await db.collection('exam_sections').doc(sectionId).update({
+            exam_link: link,
+            updated_at: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        showToast(`✅ تم حفظ رابط الامتحان لـ ${sectionName}`);
+        // تحديث البيانات المحلية
+        const section = allSections.find(s => s.id === sectionId);
+        if (section) section.exam_link = link;
+        renderSections();
+    } catch (err) {
+        console.error(err);
+        showToast('❌ حدث خطأ في حفظ الرابط');
+    }
+}
+
+// ===== نسخ رابط الشعبة =====
+function copySectionExamLink(sectionId) {
+    const input = document.getElementById(`sectionLink_${sectionId}`);
+    const link = input.value.trim();
+    if (!link) {
+        showToast('⚠️ لا يوجد رابط محفوظ');
+        return;
+    }
+    navigator.clipboard.writeText(link).then(() => {
+        showToast('✅ تم نسخ الرابط');
+    }).catch(() => {
+        input.select();
+        document.execCommand('copy');
+        showToast('✅ تم نسخ الرابط');
+    });
+}
+
+// ===== فتح رابط الشعبة =====
+function openSectionExamLink(sectionName) {
+    const section = allSections.find(s => s.name === sectionName);
+    if (!section || !section.exam_link) {
+        showToast('⚠️ لا يوجد رابط محفوظ لهذه الشعبة');
+        return;
+    }
+    window.open(section.exam_link, '_blank');
+}
+
+// ===== جلب رابط الامتحان للشعبة من Firebase =====
+async function getExamLinkForSection(sectionName) {
+    if (!sectionName) return '';
+    try {
+        const snapshot = await db.collection('exam_sections')
+            .where('name', '==', sectionName)
+            .limit(1)
+            .get();
+        
+        if (!snapshot.empty) {
+            const data = snapshot.docs[0].data();
+            return data.exam_link || '';
+        }
+        return '';
+    } catch (err) {
+        console.error('خطأ في جلب رابط الامتحان:', err);
+        return '';
+    }
 }
 
 function updateSectionFilter() {
@@ -2103,80 +2327,6 @@ async function deleteSection(id) {
     openModal('confirmModal');
 }
 
-// ========== EXAM LINKS FUNCTIONS ==========
-function loadExamLinks() {
-    const container = document.getElementById('examLinksContainer');
-    
-    if (allSections.length === 0) {
-        container.innerHTML = `
-            <div style="text-align:center;padding:20px;color:rgba(243,232,255,0.4);">
-                <i class="fas fa-info-circle" style="color:#F59E0B;"></i>
-                <p style="margin-top:6px;">أضف الشعب أولاً من تبويب "إدارة الشعب"</p>
-            </div>
-        `;
-        return;
-    }
-    
-    let html = '';
-    allSections.forEach(section => {
-        const linkKey = `exam_link_${section.name}`;
-        const savedLink = localStorage.getItem(linkKey) || '';
-        
-        html += `
-            <div class="exam-link-row">
-                <span class="section-name">📚 ${section.name}</span>
-                <input type="url" id="link_${section.id}" placeholder="رابط امتحان ${section.name}" value="${savedLink}">
-                <div class="link-actions">
-                    <button class="btn btn-sm btn-primary" onclick="saveExamLink('${section.id}', '${section.name}')"><i class="fas fa-save"></i> حفظ</button>
-                    <button class="btn btn-sm btn-copy" onclick="copyExamLink('${section.id}', '${section.name}')"><i class="fas fa-copy"></i> نسخ</button>
-                    <button class="btn btn-sm btn-outline" onclick="openExamLinkPage('${section.name}')"><i class="fas fa-external-link-alt"></i> فتح</button>
-                </div>
-            </div>
-        `;
-    });
-    container.innerHTML = html;
-}
-
-function saveExamLink(sectionId, sectionName) {
-    const input = document.getElementById(`link_${sectionId}`);
-    const link = input.value.trim();
-    if (!link) {
-        showToast('⚠️ الرجاء إدخال رابط صحيح');
-        return;
-    }
-    localStorage.setItem(`exam_link_${sectionName}`, link);
-    showToast(`✅ تم حفظ رابط ${sectionName}`);
-}
-
-function copyExamLink(sectionId, sectionName) {
-    const input = document.getElementById(`link_${sectionId}`);
-    const link = input.value.trim();
-    if (!link) {
-        showToast('⚠️ لا يوجد رابط محفوظ');
-        return;
-    }
-    navigator.clipboard.writeText(link).then(() => {
-        showToast('✅ تم نسخ الرابط');
-    }).catch(() => {
-        input.select();
-        document.execCommand('copy');
-        showToast('✅ تم نسخ الرابط');
-    });
-}
-
-function openExamLinkPage(sectionName) {
-    const link = localStorage.getItem(`exam_link_${sectionName}`);
-    if (!link) {
-        showToast('⚠️ لا يوجد رابط محفوظ لهذه الشعبة');
-        return;
-    }
-    window.open(link, '_blank');
-}
-
-function getExamLinkForSection(sectionName) {
-    return localStorage.getItem(`exam_link_${sectionName}`) || '';
-}
-
 // ========== EXAMS FUNCTIONS ==========
 function loadExams() {
     db.collection('exam_reservations').orderBy('created_at', 'desc').onSnapshot(snapshot => {
@@ -2219,7 +2369,6 @@ function renderExams(reservations) {
                            (status === 'cancelled' ? '<span class="status-badge cancelled">❌ ملغي</span>' : 
                            '<span class="status-badge pending">⏳ في انتظار التأكيد</span>');
         
-        // زر عرض الإسكرين (إذا كان موجود)
         const proofBtn = d.payment_proof_url ? 
             `<button class="proof-btn green" onclick="viewExamProof('${id}')" title="عرض الإسكرين"><i class="fas fa-image"></i></button>` : 
             `<button class="proof-btn red" onclick="sendExamConfirmationWA('${id}')" title="إرسال رابط التأكيد"><i class="fas fa-image"></i></button>`;
@@ -2240,7 +2389,6 @@ function renderExams(reservations) {
     document.getElementById('eShowingCount').textContent = `عرض ${reservations.length} حجز`;
 }
 
-// ===== عرض إسكرين الامتحان =====
 function viewExamProof(reservationId) {
     const res = allExams.find(r => r.id === reservationId);
     if (!res || !res.data.payment_proof_url) { showToast('لا يوجد إسكرين مرفوع'); return; }
@@ -2253,38 +2401,6 @@ function viewExamProof(reservationId) {
     </div>`;
     document.getElementById('proofFooter').innerHTML = `<button class="btn btn-outline" onclick="closeModal('proofModal')">إغلاق</button>`;
     openModal('proofModal');
-}
-
-// ===== إرسال رابط تأكيد الامتحان =====
-function sendExamConfirmationWA(id) {
-    const r = allExams.find(r => r.id === id);
-    if (!r) return;
-    const d = r.data;
-    const link = getConfirmationExamLink(id);
-    const phone = d.phone;
-    if (!phone) { showToast('⚠️ لا يوجد رقم واتساب'); return; }
-    
-    const cashNumber = getSiteCashNumber();
-    const cashAmount = getSiteCashAmount();
-    
-    const message = `🎓 *تأكيد حجز الامتحان - الخال*
-━━━━━━━━━━━━━━━━━━━━
-👤 *الاسم:* ${d.name || '—'}
-📚 *الشعبة:* ${d.section || '—'}
-━━━━━━━━━━━━━━━━━━━━
-💰 لتأكيد حجزك، يرجى تحويل مبلغ ${cashAmount} جنيه على رقم فودافون كاش:
-📱 ${cashNumber}
-📌 باسم: الخال
-
-🔗 بعد التحويل، اضغط على الرابط التالي لرفع إسكرين التحويل:
-${link}
-
-📌 سيتم تفعيل رابط الامتحان بعد تأكيد التحويل.
-
-شكراً لثقتكم 🤍
-الخال للخدمات التعليمية`;
-    
-    window.open(`https://wa.me/${formatPhoneForWA(phone)}?text=${encodeURIComponent(message)}`, '_blank');
 }
 
 function updateExamStats(reservations) {
@@ -2350,76 +2466,19 @@ function openExamDetail(id) {
     openModal('detailExamModal');
 }
 
-function confirmExam(id) {
+async function confirmExam(id) {
     const r = allExams.find(r => r.id === id);
     if (!r) return;
     const d = r.data;
     
-    db.collection('exam_reservations').doc(id).update({ status: 'confirmed' })
-        .then(() => {
-            showToast('✅ تم تأكيد الحجز');
-            // إرسال رسالة للعميل بأن الحجز تم تأكيده مع رابط الامتحان
-            sendExamConfirmedWA(id);
-        })
-        .catch(err => showToast('❌ حدث خطأ'));
-}
-
-// ===== إرسال رسالة تأكيد الحجز مع رابط الامتحان =====
-function sendExamConfirmedWA(id) {
-    const r = allExams.find(r => r.id === id);
-    if (!r) return;
-    const d = r.data;
-    const link = getExamLinkForSection(d.section || '');
-    const phone = d.phone;
-    if (!phone) { showToast('⚠️ لا يوجد رقم واتساب'); return; }
-    
-    const confirmationLink = getConfirmationExamLink(id);
-    
-    const message = `🎓 *تم تأكيد حجز الامتحان - الخال*
-━━━━━━━━━━━━━━━━━━━━
-👤 *الاسم:* ${d.name || '—'}
-📚 *الشعبة:* ${d.section || '—'}
-━━━━━━━━━━━━━━━━━━━━
-✅ *تم تأكيد حجزك بنجاح!*
-
-🔗 *رابط الامتحان الخاص بك:*
-${link || 'لم يتم تحديد رابط لهذه الشعبة بعد'}
-
-📌 يرجى حفظ الرابط للدخول للامتحان في الموعد المحدد.
-
-🔗 *رابط تأكيد الحجز (للرجوع):*
-${confirmationLink}
-
-شكراً لثقتكم 🤍
-الخال للخدمات التعليمية`;
-    
-    window.open(`https://wa.me/${formatPhoneForWA(phone)}?text=${encodeURIComponent(message)}`, '_blank');
-}
-
-function sendExamWA(id) {
-    const r = allExams.find(r => r.id === id);
-    if (!r) return;
-    const d = r.data;
-    const link = getExamLinkForSection(d.section || '');
-    const phone = d.phone;
-    if (!phone) { showToast('⚠️ لا يوجد رقم واتساب'); return; }
-    
-    const message = `🎓 *تأكيد حجز الامتحان - الخال*
-━━━━━━━━━━━━━━━━━━━━
-👤 *الاسم:* ${d.name || '—'}
-📚 *الشعبة:* ${d.section || '—'}
-━━━━━━━━━━━━━━━━━━━━
-✅ *تم تأكيد حجزك بنجاح*
-
-🔗 *رابط الامتحان:*
-${link || 'لم يتم تحديد رابط لهذه الشعبة بعد'}
-
-📌 يرجى حفظ الرابط للدخول للامتحان في الموعد المحدد.
-
-شكراً لثقتكم 🤍
-الخال للخدمات التعليمية`;
-    
-    window.open(`https://wa.me/${formatPhoneForWA(phone)}?text=${encodeURIComponent(message)}`, '_blank');
+    try {
+        await db.collection('exam_reservations').doc(id).update({ status: 'confirmed' });
+        showToast('✅ تم تأكيد الحجز');
+        await sendExamConfirmedWA(id);
+    } catch (err) {
+        showToast('❌ حدث خطأ');
+        console.error(err);
+    }
 }
 
 function confirmExamDelete(id) {
@@ -2528,14 +2587,17 @@ window.previewProductImage = previewProductImage;
 window.loadSections = loadSections;
 window.addNewSection = addNewSection;
 window.deleteSection = deleteSection;
-window.saveExamLink = saveExamLink;
-window.copyExamLink = copyExamLink;
-window.openExamLinkPage = openExamLinkPage;
+window.saveSectionExamLink = saveSectionExamLink;
+window.copySectionExamLink = copySectionExamLink;
+window.openSectionExamLink = openSectionExamLink;
+window.getExamLinkForSection = getExamLinkForSection;
 window.saveSettings = saveSettings;
 window.loadSettings = loadSettings;
+window.getSettings = getSettings;
 window.getSiteWhatsApp = getSiteWhatsApp;
 window.getSiteCashNumber = getSiteCashNumber;
 window.getSiteCashAmount = getSiteCashAmount;
+window.getSiteExamAmount = getSiteExamAmount;
 </script>
 </body>
 </html>
