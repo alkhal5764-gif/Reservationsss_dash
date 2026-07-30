@@ -1309,12 +1309,17 @@
             <div class="setting-group">
                 <label><i class="fab fa-whatsapp"></i> رقم واتساب الموقع</label>
                 <input type="text" id="siteWhatsApp" placeholder="أدخل رقم الواتساب">
-                <div class="current-value" id="currentWhatsApp">الحالي: 01559319483</div>
+                <div class="current-value" id="currentWhatsApp">الحالي: 01023456789</div>
             </div>
             <div class="setting-group">
                 <label><i class="fas fa-money-bill-transfer"></i> رقم تحويل فودافون كاش</label>
                 <input type="text" id="siteCashNumber" placeholder="أدخل رقم التحويل">
-                <div class="current-value" id="currentCashNumber">الحالي: 01559319483</div>
+                <div class="current-value" id="currentCashNumber">الحالي: 01023456789</div>
+            </div>
+            <div class="setting-group">
+                <label><i class="fas fa-coins"></i> قيمة تأمين الشحن (جنيه)</label>
+                <input type="number" id="siteCashAmount" placeholder="أدخل المبلغ" min="0">
+                <div class="current-value" id="currentCashAmount">الحالي: 150</div>
             </div>
             <div style="display:flex; gap:10px; flex-wrap:wrap;">
                 <button class="btn btn-primary" onclick="saveSettings()"><i class="fas fa-save"></i> حفظ الإعدادات</button>
@@ -1326,7 +1331,8 @@
             <h3 style="color:#F59E0B; margin-bottom:12px;"><i class="fas fa-info-circle"></i> معلومات الإعدادات</h3>
             <p style="color:rgba(243,232,255,0.5); font-size:14px;">
                 📌 رقم الواتساب: يستخدم في أزرار التواصل ورسائل واتساب<br>
-                📌 رقم التحويل: يستخدم في رسائل تأكيد الحجز لتحويل مبلغ الشحن
+                📌 رقم التحويل: يستخدم في رسائل تأكيد الحجز لتحويل مبلغ الشحن<br>
+                📌 قيمة تأمين الشحن: المبلغ المطلوب تحويله لتأكيد الحجز
             </p>
         </div>
     </div>
@@ -1355,11 +1361,15 @@
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 
 <script>
+// ===== إعدادات Firebase الجديدة (الخال) =====
 firebase.initializeApp({
-    apiKey: "AIzaSyDrhyNCKO5tzF-tiRQevk12kLM8hAkkr0w",
-    authDomain: "reservations-e411a.firebaseapp.com",
-    projectId: "reservations-e411a",
-    storageBucket: "reservations-e411a.appspot.com"
+    apiKey: "AIzaSyCmAh8TPjipQBHVV0Y6PRaeJjcy1HAjLEs",
+    authDomain: "alkhal-e4e90.firebaseapp.com",
+    projectId: "alkhal-e4e90",
+    storageBucket: "alkhal-e4e90.firebasestorage.app",
+    messagingSenderId: "737757411630",
+    appId: "1:737757411630:web:dd40edc5fb533d8f37e2bf",
+    measurementId: "G-4T73SZ5GY9"
 });
 
 const db = firebase.firestore();
@@ -1371,7 +1381,7 @@ let deleteId = null;
 let deleteType = null;
 let currentUserEmail = 'admin@example.com';
 
-// 🔑 مفتاح ImgBB API
+// 🔑 مفتاح ImgBB API الجديد
 const IMGBB_API_KEY = 'b2f5f64a29228a04fd1cc52fe3ed4eb3';
 
 const CONFIRM_PAGE_URL = "https://alkhal5764-gif.github.io/Confirm-your-reservation/";
@@ -1395,20 +1405,26 @@ function getSettings() {
     } catch (e) {}
     return {
         whatsapp: '01023456789',
-        cashNumber: '010559319483'
+        cashNumber: '01023456789',
+        cashAmount: '150'
     };
 }
 
 function saveSettings() {
     const whatsapp = document.getElementById('siteWhatsApp').value.trim();
     const cashNumber = document.getElementById('siteCashNumber').value.trim();
+    const cashAmount = document.getElementById('siteCashAmount').value.trim();
     
-    if (!whatsapp || !cashNumber) {
+    if (!whatsapp || !cashNumber || !cashAmount) {
         showToast('⚠️ الرجاء ملء جميع الحقول');
         return;
     }
+    if (isNaN(cashAmount) || parseFloat(cashAmount) < 0) {
+        showToast('⚠️ يرجى إدخال مبلغ صحيح');
+        return;
+    }
     
-    const settings = { whatsapp, cashNumber };
+    const settings = { whatsapp, cashNumber, cashAmount };
     localStorage.setItem('siteSettings', JSON.stringify(settings));
     updateSettingsDisplay(settings);
     showToast('✅ تم حفظ الإعدادات بنجاح');
@@ -1418,12 +1434,14 @@ function loadSettings() {
     const settings = getSettings();
     document.getElementById('siteWhatsApp').value = settings.whatsapp;
     document.getElementById('siteCashNumber').value = settings.cashNumber;
+    document.getElementById('siteCashAmount').value = settings.cashAmount || '150';
     updateSettingsDisplay(settings);
 }
 
 function updateSettingsDisplay(settings) {
     document.getElementById('currentWhatsApp').textContent = `الحالي: ${settings.whatsapp}`;
     document.getElementById('currentCashNumber').textContent = `الحالي: ${settings.cashNumber}`;
+    document.getElementById('currentCashAmount').textContent = `الحالي: ${settings.cashAmount || '150'}`;
 }
 
 function getSiteWhatsApp() {
@@ -1432,6 +1450,10 @@ function getSiteWhatsApp() {
 
 function getSiteCashNumber() {
     return getSettings().cashNumber;
+}
+
+function getSiteCashAmount() {
+    return getSettings().cashAmount || '150';
 }
 
 // ========== TOAST ==========
@@ -1793,6 +1815,7 @@ function buildHInvoiceMessage(data, status, paymentConfirmed) {
     const orderDate = formatDate(data.created_at);
     const paymentStatus = paymentConfirmed ? '✅ تم دفع رسوم الشحن' : '⏳ لم يتم الدفع بعد';
     const cashNumber = getSiteCashNumber();
+    const cashAmount = getSiteCashAmount();
     
     let statusMessage = '';
     switch(status) {
@@ -1821,6 +1844,7 @@ function buildHInvoiceMessage(data, status, paymentConfirmed) {
 ${statusMessage}
 ━━━━━━━━━━━━━━━━━━━━
 📱 *رقم التحويل:* ${cashNumber}
+💵 *المبلغ:* ${cashAmount} جنيه
 شكراً لاختياركم الخال`;
     return msg;
 }
@@ -1846,11 +1870,12 @@ function sendHConfirmationWA(phone, name, reservationId) {
     const link = getConfirmationLink(reservationId);
     const formattedPhone = formatPhoneForWA(phone);
     const cashNumber = getSiteCashNumber();
+    const cashAmount = getSiteCashAmount();
     const message = `🌹 مرحباً ${name}،
 
 نشكرك على حجزك في الخال للإلكترونيات 🎧
 
-للتأكيد حجزك، يرجى تحويل مبلغ 150 جنيه (تأمين الشحن) على رقم فودافون كاش:
+للتأكيد حجزك، يرجى تحويل مبلغ ${cashAmount} جنيه (تأمين الشحن) على رقم فودافون كاش:
 📱 ${cashNumber}
 📌 باسم: الخال
 
@@ -2039,7 +2064,6 @@ async function addNewSection() {
     const name = input.value.trim();
     if (!name) { showToast('⚠️ الرجاء إدخال اسم الشعبة'); return; }
     
-    // التحقق من عدم التكرار
     if (allSections.some(s => s.name === name)) {
         showToast('⚠️ هذه الشعبة موجودة بالفعل');
         return;
@@ -2132,7 +2156,6 @@ function copyExamLink(sectionId, sectionName) {
     navigator.clipboard.writeText(link).then(() => {
         showToast('✅ تم نسخ الرابط');
     }).catch(() => {
-        // الطريقة البديلة
         input.select();
         document.execCommand('copy');
         showToast('✅ تم نسخ الرابط');
@@ -2411,6 +2434,7 @@ window.saveSettings = saveSettings;
 window.loadSettings = loadSettings;
 window.getSiteWhatsApp = getSiteWhatsApp;
 window.getSiteCashNumber = getSiteCashNumber;
+window.getSiteCashAmount = getSiteCashAmount;
 </script>
 </body>
 </html>
